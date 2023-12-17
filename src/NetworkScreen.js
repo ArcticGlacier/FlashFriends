@@ -1,6 +1,6 @@
 import React from "react";
-import { addEvent, getFriendshipData } from "./database";
-import { useState } from "react";
+import { addEvent, getFriendshipData, getActiveEvent } from "./database";
+import { useState, useEffect } from "react";
 
 function NetworkScreen({ user, friends }) {
   const [showForm, setShowForm] = useState(false);
@@ -11,6 +11,7 @@ function NetworkScreen({ user, friends }) {
     time: "",
     selectedFriends: [],
   });
+  const [activeEvent, setActiveEvent] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -42,24 +43,47 @@ function NetworkScreen({ user, friends }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addEvent(eventDetails);
+    addEvent(user, eventDetails);
     // Handle event submission, could involve sending data to server or other actions
     setShowForm(false);
-    // Reset form fields
-    setEventDetails({
-      title: "",
-      location: "",
-      date: "",
-      time: "",
-      selectedFriends: [],
-    });
+    setActiveEvent(true);
   };
 
-  return (
-    <div>
-      {!showForm ? (
-        <button onClick={() => setShowForm(true)}>Create Event</button>
-      ) : (
+  useEffect(() => {
+    let details = getActiveEvent(user);
+
+    if (
+      details &&
+      details.title != null &&
+      details.title !== "" &&
+      details.selectedFriends !== undefined // Additional check
+    ) {
+      setEventDetails({
+        title: details.title,
+        location: details.location,
+        date: details.date,
+        time: details.time,
+        selectedFriends: details.selectedFriends,
+      });
+      setActiveEvent(true);
+    } else {
+      setActiveEvent(false);
+      // Handle a case where active event details are not available
+      setEventDetails({
+        title: "",
+        location: "",
+        date: "",
+        time: "",
+        selectedFriends: [],
+      });
+    }
+  }, []);
+
+  function displayForm() {
+    if (!showForm && !activeEvent) {
+      return <button onClick={() => setShowForm(true)}>Create Event</button>;
+    } else if (showForm) {
+      return (
         <form onSubmit={handleSubmit}>
           <label>
             Event Title:
@@ -118,24 +142,41 @@ function NetworkScreen({ user, friends }) {
           </label>
           <button type="submit">Submit</button>
         </form>
-      )}
+      );
+    }
+  }
 
+  return (
+    <div>
+      {displayForm()}
       {eventDetails.title && (
-        <div>
-          <h3>Event Details:</h3>
-          <p>Title: {eventDetails.title}</p>
-          <p>Location: {eventDetails.location}</p>
-          <p>Time: {eventDetails.time}</p>
-          <div>
-            {eventDetails.selectedFriends.map((friend, index) => (
-              <div
-                key={index}
-                style={{ display: "inline-block", margin: "5px" }}
-              >
-                {friend}
-              </div>
-            ))}
+        <div style={{ position: "relative", marginTop: "20px" }}>
+          <div
+            style={{
+              display: "inline-block",
+              padding: "10px",
+              backgroundColor: "#f0f0f0",
+            }}
+          >
+            <p>Title: {eventDetails.title}</p>
+            <p>Location: {eventDetails.location}</p>
+            <p>Time: {eventDetails.time}</p>
           </div>
+          {eventDetails.selectedFriends.map((friend, index) => (
+            <div
+              key={index}
+              style={{
+                position: "absolute",
+                top: "-50px",
+                left: `${index * 100}px`,
+                backgroundColor: "#f0f0f0",
+                padding: "5px",
+                borderRadius: "50%",
+              }}
+            >
+              {friend}
+            </div>
+          ))}
         </div>
       )}
     </div>

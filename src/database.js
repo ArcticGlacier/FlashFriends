@@ -4,32 +4,28 @@ const users = [
     id: 1,
     username: "gagan_brar",
     password: "gagan",
-    firstname: "Gagan",
-    lastname: "Brar",
+    name: "Gagan Brar",
     schedule: "Mon-Wed-Fri",
   },
   {
     id: 2,
     username: "ritwika101",
     password: "ritwika", // Hashed password: "ritwika"
-    firstname: "Ritwika",
-    lastname: "Neupane",
+    name: "Ritwika Neupane",
     schedule: "Tue-Thu-Sat",
   },
   {
     id: 3,
     username: "rachel07",
     password: "ritwika", // Hashed password: "rachel"
-    firstname: "Rachel",
-    lastname: "Renegado",
+    name: "Rachel Renegado",
     schedule: "Tue-Thu-Sat",
   },
   {
     id: 4,
     username: "abnerTheJoker",
     password: "ritwika", // Hashed password: "abner"
-    firstname: "Abner",
-    lastname: "Yousef",
+    name: "Abner Yousef",
     schedule: "Tue-Thu-Sat",
   },
 ];
@@ -96,9 +92,8 @@ function getUserData(username, password) {
     return { message: "Invalid username or password" };
   }
 
-  const fullName = user.firstname + " " + user.lastname;
   const userFriendships = friendships.filter(
-    (f) => f.user1 === fullName || f.user2 === fullName
+    (f) => f.user1 === user.name || f.user2 === user.name
   );
   const userEvents = events.filter((event) =>
     event.attendees.includes(user.id)
@@ -112,8 +107,6 @@ function getUserData(username, password) {
 }
 
 function getFriendshipData(user, friends) {
-  const fullName = user.firstname + " " + user.lastname;
-
   let friendNames = []; // Initialize an empty array to store friend names
 
   friends.forEach((friend) => {
@@ -122,7 +115,7 @@ function getFriendshipData(user, friends) {
       last_hangout_date: friend.last_hangout_date,
       hangout_count: friend.hangout_count,
     };
-    if (friend.user1 !== fullName) {
+    if (friend.user1 !== user.name) {
       friendInfo.friend = friend.user1;
       friendNames.push(friendInfo); // Push friend.user1 to friendNames array if condition is met
     } else {
@@ -134,18 +127,35 @@ function getFriendshipData(user, friends) {
   return friendNames; // Return the array of friend names
 }
 
-function addEvent(details) {
+function addEvent(user, details) {
   let newEventID = events.length;
+
+  // Map selected friends to set initial values
+  let updatedSelectedFriends = details.selectedFriends.map((friend) => {
+    return { [friend]: false };
+  });
+
+  // Add the current user to the selected friends
+  updatedSelectedFriends.push({ [user.name]: true });
+
   let newEvent = {
     id: newEventID,
     location: details.location,
     event_date: details.date,
     event_time: details.time,
     title: details.title,
-    attendees: details.selectedFriends,
+    attendees: updatedSelectedFriends,
     pictures: [],
   };
   events.push(newEvent);
 }
 
-export { getUserData, getFriendshipData, addEvent };
+function getActiveEvent(user) {
+  let arrayLength = events.length - 1;
+  if (arrayLength > 0 && user.name in events[arrayLength - 1].selectedFriends) {
+    console.log(events[arrayLength - 1].selectedFriends);
+    return events[arrayLength - 1];
+  }
+}
+
+export { getUserData, getFriendshipData, addEvent, getActiveEvent };
