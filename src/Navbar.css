@@ -1,8 +1,11 @@
+body {
+  font-family: "JetBrains Mono";
+}
 .bottom-navbar {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background-color: #333;
+   background-color: #E7E4D4;
     overflow: hidden;
   }
   
@@ -13,10 +16,36 @@
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    align-content: center;
+    margin-right: 5%;
+    margin-left: 5%;
   }
   
   .bottom-navbar a:hover {
     background-color: #ddd;
     color: black;
   }
-  
+
+.map{
+  color:#414141;
+  height: 5vh;
+  width: 5vh;
+  margin-right: 2vw;
+  margin-left: 2vw;
+}
+
+.network{
+ color: #414141;
+ height: 5vh;
+ width: 5vh;
+ margin-right: 2vw;
+ margin-left: 4vw;
+}
+
+.profile{
+  color: #414141;
+  height: 5vh;
+  width: 5vh;
+  margin-right: 2vw;
+  margin-left: 5vw;
+}
