@@ -9,12 +9,17 @@ function Home({ userData }) {
   const user = userData.user;
   const friendships = userData.friendships;
   const events = userData.events;
+
+  console.log(friendships);
   return (
     <Router>
       <Routes>
         <Route path="/map" element={<MapScreen />} />
         <Route path="/network" element={<NetworkScreen />} />
-        <Route path="/profile" element={<ProfileScreen />} />
+        <Route
+          path="/profile"
+          element={<ProfileScreen user={user} friends={friendships} />}
+        />
       </Routes>
       <BottomNavbar />
     </Router>

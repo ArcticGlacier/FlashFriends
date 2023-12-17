@@ -11,7 +11,7 @@ const users = [
   {
     id: 2,
     username: "ritwika101",
-    password: "riwtika", // Hashed password: "ritwika"
+    password: "ritwika", // Hashed password: "ritwika"
     firstname: "Ritwika",
     lastname: "Neupane",
     schedule: "Tue-Thu-Sat",
@@ -38,24 +38,38 @@ const users = [
 const friendships = [
   {
     id: 1,
-    user1_id: 1,
-    user2_id: 2,
+    user1: "Gagan Brar",
+    user2: "Ritwika Neupane",
     last_hangout_date: "2023-12-01",
     hangout_count: 5,
   },
   {
     id: 2,
-    user1_id: 1,
-    user2_id: 3,
+    user1: "Gagan Brar",
+    user2: "Rachel Renegado",
     last_hangout_date: "2023-12-05",
     hangout_count: 3,
   },
   {
     id: 3,
-    user1_id: 1,
-    user2_id: 4,
+    user1: "Gagan Brar",
+    user2: "Abner Yousef",
     last_hangout_date: "2023-11-27",
     hangout_count: 1,
+  },
+  {
+    id: 4,
+    user1: "Ritwika Neupane",
+    user2: "Rachel Renegado",
+    last_hangout_date: "2023-06-20",
+    hangout_count: 1,
+  },
+  {
+    id: 5,
+    user1: "Ritwika Neupane",
+    user2: "Aliya Mammadova",
+    last_hangout_date: "2023-04-28",
+    hangout_count: 7,
   },
 ];
 
@@ -83,8 +97,9 @@ function getUserData(username, password) {
     return { message: "Invalid username or password" };
   }
 
+  const fullName = user.firstname + " " + user.lastname;
   const userFriendships = friendships.filter(
-    (f) => f.user1_id === user.id || f.user2_id === user.id
+    (f) => f.user1 === fullName || f.user2 === fullName
   );
   const userEvents = events.filter((event) =>
     event.attendee_ids.includes(user.id)
