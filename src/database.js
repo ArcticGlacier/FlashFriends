@@ -1,4 +1,3 @@
-// Hardcoded users
 const users = [
   {
     id: 1,
