@@ -15,7 +15,10 @@ function Home({ userData }) {
     <Router>
       <Routes>
         <Route path="/map" element={<MapScreen />} />
-        <Route path="/network" element={<NetworkScreen />} />
+        <Route
+          path="/network"
+          element={<NetworkScreen user={user} friends={friendships} />}
+        />
         <Route
           path="/profile"
           element={<ProfileScreen user={user} friends={friendships} />}

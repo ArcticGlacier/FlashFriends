@@ -12,7 +12,7 @@ function App() {
 
   const handleLogin = () => {
     let userData = getUserData(username, password);
-    console.log(userData);
+
     if (userData.message != null) {
       setError(userData.message);
     } else {

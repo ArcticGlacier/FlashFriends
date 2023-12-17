@@ -78,11 +78,10 @@ const events = [
   {
     id: 1,
     location: "University of Calgary - Taylor Family Digital Library",
-    latitude: 51.0755, // Example latitude
-    longitude: -114.1282, // Example longitude
     event_date: "2023-12-15",
+    event_time: "",
     title: "TFDL Study Session",
-    attendee_ids: [1, 2, 4], // IDs of Gagan, Ritwika, and Abner
+    attendees: ["Gagan Brar", "Ritwika Neupane", "Abner Yousef"], // IDs of Gagan, Ritwika, and Abner
     pictures: [], // Placeholder for pictures (can be URLs or other data)
   },
   // Add more hardcoded events as needed
@@ -102,7 +101,7 @@ function getUserData(username, password) {
     (f) => f.user1 === fullName || f.user2 === fullName
   );
   const userEvents = events.filter((event) =>
-    event.attendee_ids.includes(user.id)
+    event.attendees.includes(user.id)
   );
 
   return {
@@ -112,4 +111,41 @@ function getUserData(username, password) {
   };
 }
 
-export { getUserData };
+function getFriendshipData(user, friends) {
+  const fullName = user.firstname + " " + user.lastname;
+
+  let friendNames = []; // Initialize an empty array to store friend names
+
+  friends.forEach((friend) => {
+    let friendInfo = {
+      friend: "",
+      last_hangout_date: friend.last_hangout_date,
+      hangout_count: friend.hangout_count,
+    };
+    if (friend.user1 !== fullName) {
+      friendInfo.friend = friend.user1;
+      friendNames.push(friendInfo); // Push friend.user1 to friendNames array if condition is met
+    } else {
+      friendInfo.friend = friend.user2;
+      friendNames.push(friendInfo); // Push friend.user2 to friendNames array if condition is not met
+    }
+  });
+
+  return friendNames; // Return the array of friend names
+}
+
+function addEvent(details) {
+  let newEventID = events.length;
+  let newEvent = {
+    id: newEventID,
+    location: details.location,
+    event_date: details.date,
+    event_time: details.time,
+    title: details.title,
+    attendees: details.selectedFriends,
+    pictures: [],
+  };
+  events.push(newEvent);
+}
+
+export { getUserData, getFriendshipData, addEvent };
