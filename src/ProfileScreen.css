@@ -2,6 +2,7 @@
 body{
     font-family: "JetBrains Mono";
     line-height: 3vh;
+    background-color: #E7E4D4;
 }
 
 li{
@@ -28,4 +29,5 @@ li{
     border: 2px solid #8396D9;
     padding: 5px 10px;
     width: 75vw;
+    background-color: #8396D9;
 }

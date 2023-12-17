@@ -1,5 +1,6 @@
 body {
   font-family: "JetBrains Mono";
+  background-color: ;
 }
 .bottom-navbar {
     position: fixed;
@@ -48,4 +49,9 @@ body {
   width: 5vh;
   margin-right: 2vw;
   margin-left: 5vw;
+}
+
+h2{
+  text-align: center;
+  margin-top: 20px;
 }

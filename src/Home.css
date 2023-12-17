@@ -1,0 +1,14 @@
+.ProfilePage{
+    font-family: "JetBrains Mono";
+}
+
+background{
+    background-color:#E7E4D4;
+    background-image: none;
+}
+
+.square{
+    fill: none;
+    outline: #414141;
+    border-radius: 8px;
+}
