@@ -1,6 +1,7 @@
 import React from "react";
 import { addEvent, getFriendshipData } from "./database";
 import { useState } from "react";
+import './NetworkScreen.css';
 
 function NetworkScreen({ user, friends }) {
   const [showForm, setShowForm] = useState(false);
@@ -56,12 +57,12 @@ function NetworkScreen({ user, friends }) {
   };
 
   return (
-    <div>
+    <div className="network-form-container">
       {!showForm ? (
-        <button onClick={() => setShowForm(true)}>Create Event</button>
+        <button className="CreateHangout" onClick={() => setShowForm(true)}>Let's Hangout!</button>
       ) : (
-        <form onSubmit={handleSubmit}>
-          <label>
+        <form className="network-form" onSubmit={handleSubmit}>
+          <label className="inputA">
             Event Title:
             <input
               type="text"
@@ -121,7 +122,7 @@ function NetworkScreen({ user, friends }) {
       )}
 
       {eventDetails.title && (
-        <div>
+        <div className="event-details">
           <h3>Event Details:</h3>
           <p>Title: {eventDetails.title}</p>
           <p>Location: {eventDetails.location}</p>

@@ -36,3 +36,56 @@
     transform: rotate(360deg);
   }
 }
+body{  
+  background-color: #E7E4D4 ;
+  font-family: "JetBrains Mono";
+  line-height: 5vh; 
+  background-size: cover; 
+  height: 100vh;
+}
+
+h1 {
+  font-size: 4vw;
+  color: #414141;
+  padding-bottom: 5%;
+}
+
+.login-user{
+  background-color: #8cbc7bda;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  max-width: 60vw;
+  height: 70vw;
+  margin-top: 47%;
+  margin-left: 22%;
+}
+
+label{
+  font-size: 10px;
+}
+
+button{
+  justify-content: center;
+  font-size: 15px;
+  text-align: center;
+  background-color: #D08270;
+  color: #414141;
+  border: none;
+  border-radius: 8px;
+  height: 4vh;
+  width: 20vw;
+  font-family: "JetBrains Mono";
+  margin-top: 5%;
+  
+}
+
+input {
+  border-radius: 4vw;
+  border-color:#8396D9;
+  line-height: 3vh;
+  max-width: 15vh;
+  background-color: #d0827078;
+}

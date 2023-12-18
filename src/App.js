@@ -25,8 +25,8 @@ function App() {
   return (
     <div>
       {!success ? (
-        <div>
-          <h1>Login Page</h1>
+        <div className="login-user">
+          <h1>Flash Friends Login</h1>
           <div>
             <label>Username:</label>
             <input

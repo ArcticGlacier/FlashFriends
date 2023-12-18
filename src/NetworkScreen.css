@@ -1,0 +1,49 @@
+body{
+    font-size:10px;
+    line-height: 10px;
+}
+.network-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.network-form {
+  background-color: #8396D9;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 75%;
+  max-width: 400px;
+}
+
+.network-form label {
+  display: block;
+  margin-bottom: 3px;
+  color: #333;
+}
+
+.network-form input,
+.network-form select {
+  color: #fff;
+}
+
+
+.submit{
+    border-radius: 8px;
+    display: flex;
+    width: 5vw;
+    color:#8cbc7bda;
+}
+
+.CreateHangout{
+    width: 50vw; /* Adjust the size as needed */
+    height: 50vw;
+    border-radius: 50%;
+    background-color: #8CBC7B ; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
